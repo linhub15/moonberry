@@ -4,9 +4,13 @@ A modern SaaS starter built with TanStack Start, React 19, Tailwind CSS 4, Bette
 
 ## Requirements
 
-- Node.js 22.12 or newer
-- pnpm 12.8.1
+- pnpm 12.16.1 (standalone installation recommended)
 - Docker
+
+pnpm manages both the package manager version and Node.js 26.13.0 for this project.
+`pnpm install` downloads the pinned Node.js runtime, and `pnpm` scripts and
+`pnpm exec` use it automatically. No separate Node.js version manager is needed.
+Dependency versions are saved exactly and committed with `pnpm-lock.yaml`.
 
 ## Local setup
 
@@ -27,5 +31,10 @@ Use `pnpm db:status` to inspect the PostgreSQL container and `pnpm db:down` to s
 - `pnpm check` runs typechecking, linting, formatting checks, tests, and the production build.
 - `pnpm storybook` starts the component workshop.
 - `pnpm build-storybook` verifies the static Storybook build.
+
+Use `pnpm install --frozen-lockfile` for a reproducible install. To refresh
+dependencies, run `pnpm update --latest`, then `pnpm check` and
+`pnpm build-storybook`. Update `packageManager` and `devEngines.runtime.version`
+in `package.json` when upgrading pnpm or Node.js, and commit the regenerated lockfile.
 
 Server secrets and database access stay behind TanStack Start's server-only import boundary. Client-visible configuration must use the `VITE_` prefix; never expose database or authentication secrets that way.
